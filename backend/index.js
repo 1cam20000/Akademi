@@ -1,5 +1,8 @@
 import express from "express";
 import { connectMongodb } from "./database/connectMongodb.js";
+import { corsMiddleware } from "./middlewares/corsOption.js";
+import dotenv from "dotenv";
+import { studentRouter } from "./controllers/student.controller.js";
 
 //
 
@@ -8,7 +11,10 @@ const app = express();
 //
 
 app.use(express.json());
+app.use(corsMiddleware);
+dotenv.config();
 connectMongodb();
+app.use("/student", studentRouter)
 
 //
 const port = 8888;
