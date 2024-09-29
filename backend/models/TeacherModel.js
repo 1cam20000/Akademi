@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import validator from "validator";
 
 const TeacherSchema = mongoose.Schema(
   {
@@ -6,11 +7,17 @@ const TeacherSchema = mongoose.Schema(
       type: datatypes.string(20),
       required: [true, "email is required and should be unique"],
       unique: true,
+      validate: {
+        validator: validator.isEmail,
+        message: "Please provide a valid email",
+        isAsync: false
+      },
     },
 
     password: {
       type: String,
       required: [true, "password is required"],
+      mindlength: 6
     },
 
     firstName: {
@@ -45,6 +52,12 @@ const TeacherSchema = mongoose.Schema(
       type: String,
       required: [true, "degree is required"],
     },
+
+    subject: {
+      type: String,
+      required: [true, "subject is required"],
+    },
+
     startEndDate: String,
     city: String,
     teacherStudent: [

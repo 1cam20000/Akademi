@@ -1,18 +1,8 @@
 import mongoose, { Schema } from "mongoose";
+import validator from "validator";
 
 const studentSchema = new Schema(
   {
-    email: {
-      type: String,
-      required: [true, "email is required and should be unique"],
-      unique: true,
-    },
-
-    // password: {
-    //   type: String,
-    //   required: [true, "password is required"],
-    // },
-
     firstName: {
       type: String,
       required: [true, "firstName is required"],
@@ -22,52 +12,74 @@ const studentSchema = new Schema(
       type: String,
       required: [true, "lastName is required"],
     },
+    email: {
+      type: String,
+      required: [true, "email is required and should be unique"],
+      unique: true,
+      validate: {
+        validator: validator.isEmail,
+        message: "Please provide a valid email",
+        isAsync: false
+      },
+    },
 
-    // dateOfBirth: {
-    //   type: String,
-    //   required: [true, "dateOfBirth is required"],
-    // },
+    password: {
+      type: String,
+      required: [true, "password is required"],
+    },
 
-    // parentName: {
-    //   type: String,
-    // },
 
-    // phone: {
-    //   type: String,
-    //   required: [true, "phone is required "],
-    // },
 
-    // address: {
-    //   type: String,
-    //   required: [true, "address is require"],
-    // },
-    // parentEmail: {
-    //   type: String,
-    //   required: [true, "parentEmail is required"],
-    // },
+    dateOfBirth: {
+      type: String,
+      required: [true, "dateOfBirth is required"],
+    },
 
-    // parentPhone: {
-    //   type: String,
-    //   required: [true, "phone is require"],
-    // },
+    parentName: {
+      type: String,
+    },
 
-    // parentAddress: String,
+    phone: {
+      type: String,
+      required: [true, "phone is required "],
+    },
 
-    // payment: {
-    //   type: String,
-    //   required: [true, "payment is required"],
-    // },
+    address: {
+      type: String,
+      required: [true, "address is require"],
+    },
+    parentEmail: {
+      type: String,
+      required: [true, "parentEmail is required"],
+      validate: {
+        validator: validator.isEmail,
+        message: "Please provide a valid email",
+        isAsync: false
+      },
+    },
 
-    // studentTeacher: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "teacher",
-    //   },
-    // ],
-    // isDelete: {
-    //   type: Boolean,
-    //   default: false,
-    // },
+    parentPhone: {
+      type: String,
+      required: [true, "phone is require"],
+    },
+
+    parentAddress: String,
+
+    payment: {
+      type: String,
+      required: [true, "payment is required"],
+    },
+
+    studentTeacher: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "teacher",
+      },
+    ],
+    isDelete: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

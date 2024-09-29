@@ -27,7 +27,7 @@ const addStudents = async (req, res) => {
             message: "Add new student successfully!",
             data: {
                 _id: newStudent._id,
-                newStudent: newStudent
+
             },
         })
     } catch (error) {
@@ -37,4 +37,45 @@ const addStudents = async (req, res) => {
     }
 }
 
-export { getAllStudents, addStudents as addStudent }
+
+const updateStudents = async (req, res) => {
+
+    try {
+        await StudentModel.findOneAndUpdate(
+            { _id: req.body.studentId },
+            req.body.payload
+        );
+
+        res.status(201).json({
+            message: "Update student's information successfully"
+        })
+
+    } catch (error) {
+        res.status(400).json({
+            message: `Edit student controller error: ${error.message}`,
+        });
+    }
+
+}
+
+
+
+const deleteStudents = async (req, res) => {
+    try {
+        await StudentModel.findOneAndDelete({
+            _id: req.body.studentId,
+        });
+
+        // const result = await StudentModel.findByIdAndDelete(req.params.id)
+
+        res.status(201).json({
+            message: "Delete student's information successfully"
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: `Delete student controller error: ${error.message}`,
+        });
+    }
+}
+
+export { getAllStudents, addStudents, updateStudents, deleteStudents }
