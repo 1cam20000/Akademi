@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllStudents } from '../controllers/StudentController.js';
+import { addStudent, getAllStudents } from '../controllers/StudentController.js';
 
 
 
@@ -9,8 +9,8 @@ const studentRoute = Router();
 //routers
 //--get all students
 studentRoute.post("/get-students", getAllStudents)
-
-
+//--add new students
+studentRoute.post("/add-students", addStudent)
 //GET-get
 //POST-edit
 //POST-delete
