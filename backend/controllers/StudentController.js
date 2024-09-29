@@ -52,7 +52,7 @@ const updateStudents = async (req, res) => {
 
     } catch (error) {
         res.status(400).json({
-            message: `Edit student controller error: ${error.message}`,
+            message: `Update student controller error: ${error.message}`,
         });
     }
 

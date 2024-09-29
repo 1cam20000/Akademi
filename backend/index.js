@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import studentRoute from "./routes/studentRoute.js";
 import morgan from 'morgan';
 import cors from 'cors';
+import teacherRoute from "./routes/teacherRoute.js";
 //
 
 
@@ -24,6 +25,8 @@ app.use(cors());
 
 //user route
 app.use("/api/v1/students", studentRoute);
+app.use("/api/v1/teachers", teacherRoute);
+
 
 //database connections
 // app.use(express.json());

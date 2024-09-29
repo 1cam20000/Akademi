@@ -4,7 +4,7 @@ import validator from "validator";
 const TeacherSchema = mongoose.Schema(
   {
     email: {
-      type: datatypes.string(20),
+      type: String,
       required: [true, "email is required and should be unique"],
       unique: true,
       validate: {
