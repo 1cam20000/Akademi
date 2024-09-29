@@ -45,6 +45,9 @@ const updateTeachers = async (req, res) => {
             },
             req.body.payload
         )
+        res.status(201).json({
+            message: "Update teacher's information successfully"
+        })
     } catch (error) {
         res.status(400).json({
             message: `Update teacher controller error: ${error.message}`,

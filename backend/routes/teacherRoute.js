@@ -19,3 +19,5 @@ teacherRoute.post("/update-teachers", updateTeachers)
 teacherRoute.post("/delete-teachers", deleteTeachers)
 
 export default teacherRoute
+
+//
