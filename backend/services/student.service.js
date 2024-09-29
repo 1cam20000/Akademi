@@ -2,8 +2,15 @@ import { StudentModel } from "../models/student.model.js";
 
 //create a new student
 const createStudent = async (body) => {
-  const student = await StudentModel.create(body);
-  return student;
+  try {
+    // console.log("Creating student with data:", body);
+
+    const student = await StudentModel.create(body);
+    return student;
+  } catch (error) {
+    console.error("Error creating student:", error);
+    throw new Error("Could not create student");
+  }
 };
 
 //find one student to check mail existed (with password)
