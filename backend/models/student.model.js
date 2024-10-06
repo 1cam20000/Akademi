@@ -2,18 +2,19 @@ import mongoose from "mongoose";
 
 const StudentSchema = mongoose.Schema(
   {
+    studentId: { type: String, required: true, unique: true },
     email: String,
     password: String,
     firstName: String,
     lastName: String,
-    dateOfBirth: String,
+    dateOfBirth: Date,
     parentName: String,
     phone: String,
     address: String,
     parentEmail: String,
     parentPhone: String,
     parentAddress: String,
-    payment:String,
+    payment: String,
     studentTeacher: [
       {
         type: mongoose.Schema.Types.ObjectId,
