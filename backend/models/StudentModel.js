@@ -37,11 +37,13 @@ const studentSchema = new Schema(
 
     parentName: {
       type: String,
+      required: [true, "parent name is required "],
     },
 
     phone: {
       type: String,
       required: [true, "phone is required "],
+      unique: true,
     },
 
     address: {
@@ -61,6 +63,7 @@ const studentSchema = new Schema(
     parentPhone: {
       type: String,
       required: [true, "phone is require"],
+      unique: true,
     },
 
     parentAddress: String,
@@ -70,16 +73,16 @@ const studentSchema = new Schema(
       required: [true, "payment is required"],
     },
 
-    studentTeacher: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "teacher",
-      },
-    ],
-    isDelete: {
-      type: Boolean,
-      default: false,
-    },
+    // studentTeacher: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "teacher",
+    //   },
+    // ],
+    // isDelete: {
+    //   type: Boolean,
+    //   default: false,
+    // },
   },
   {
     timestamps: true,

@@ -32,6 +32,7 @@ const TeacherSchema = mongoose.Schema(
     phone: {
       type: String,
       required: [true, "phone is required "],
+      unique: true,
     },
 
     address: {

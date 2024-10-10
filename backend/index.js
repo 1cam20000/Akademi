@@ -6,6 +6,7 @@ import studentRoute from "./routes/studentRoute.js";
 import morgan from 'morgan';
 import cors from 'cors';
 import teacherRoute from "./routes/teacherRoute.js";
+import classRoute from "./routes/classRoute.js";
 //
 
 
@@ -26,6 +27,8 @@ app.use(cors());
 //user route
 app.use("/api/v1/students", studentRoute);
 app.use("/api/v1/teachers", teacherRoute);
+app.use("/api/v1/classes", classRoute);
+
 
 
 //database connections

@@ -20,6 +20,11 @@ const getAllStudents = async (req, res) => {
 }
 
 const addStudents = async (req, res) => {
+
+    const { firstName, lastName, email, password, dateOfBirth, parentName, phone, address, parentEmail, parentPhone, payment } = req.body;
+    if (!firstName || !lastName || !email || !password || !dateOfBirth || !parentName || !phone || !address || !parentEmail || !parentPhone || !payment) {
+        throw new Error("Miss anything");
+    }
     try {
         const newStudent = new StudentModel(req.body);
         await newStudent.save();
