@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import teacherRoute from "./routes/teacherRoute.js";
 import classRoute from "./routes/classRoute.js";
+import attendanceRoute from "./routes/attendanceRoute.js";
 //
 
 
@@ -28,6 +29,8 @@ app.use(cors());
 app.use("/api/v1/students", studentRoute);
 app.use("/api/v1/teachers", teacherRoute);
 app.use("/api/v1/classes", classRoute);
+app.use("/api/v1/attendances", attendanceRoute);
+
 
 
 
