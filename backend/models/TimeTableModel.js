@@ -3,10 +3,11 @@ import validator from "validator";
 
 const timeTableSchema = new Schema(
     {
-        class: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'classes',
-            required: [true, "class is required"],
+        grade: {
+            // type: mongoose.Schema.Types.ObjectId,
+            // ref: 'classes',
+            type: String,
+            required: [true, "class is required"]
         },
 
         day: {
@@ -17,9 +18,10 @@ const timeTableSchema = new Schema(
             type: String,
             required: [true, "time is required"]
         },
-        subject: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'subject',
+        name: {
+            // type: mongoose.Schema.Types.ObjectId,
+            // ref: 'subjects',
+            type: String,
             required: [true, "subject is required"]
         }
     },

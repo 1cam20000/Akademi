@@ -11,7 +11,7 @@ const getAllClasses = async (req, res) => {
             data: allClasses
         })
 
-        console.log(allClasses);
+        // console.log(allClasses);
     } catch (error) {
         res.status(400).json({
             message: `Get classes controller error: ${error.message}`
