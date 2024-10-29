@@ -10,6 +10,7 @@ import classRoute from "./routes/classRoute.js";
 import attendanceRoute from "./routes/attendanceRoute.js";
 import subjectRoute from "./routes/subjectRoute.js";
 import timetableRoute from "./routes/timetableRoute.js";
+import eventsRoute from "./routes/eventsRoute.js";
 //
 
 
@@ -34,6 +35,8 @@ app.use("/api/v1/classes", classRoute);
 app.use("/api/v1/attendances", attendanceRoute);
 app.use("/api/v1/subjects", subjectRoute);
 app.use("/api/v1/timetables", timetableRoute);
+app.use("/api/v1/events", eventsRoute);
+
 
 
 
