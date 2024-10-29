@@ -41,7 +41,7 @@ const updateTeachers = async (req, res) => {
     try {
         await TeacherModel.findOneAndUpdate(
             {
-                _id: req.body.teacherId
+                _id: req.body.timetableId
             },
             req.body.payload
         )

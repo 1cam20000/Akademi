@@ -18,18 +18,16 @@ const getAllTimeTables = async (req, res) => {
     }
 }
 
-const getTimeTableByClassID = async (req, res) => {
+const getTimeTableByClass = async (req, res) => {
 
+    const { grade } = req.body
 
     try {
-        const timeTableByClassID = await TimeTableModel.find({
-            class_id: class_id
-
-        })
+        const timeTableByClass = await TimeTableModel.find({ grade })
 
         res.status(200).json({
             message: `Get timetable of class successfully`,
-            data: timeTableByClassID
+            data: timeTableByClass
         })
     } catch (error) {
         res.status(400).json({
@@ -44,9 +42,7 @@ const addTimeTable = async (req, res) => {
 
     try {
 
-        const existingElement = await TimeTableModel.findOne({})
-        console.log(existingElement);
-        
+
         if (!grade || !day || !time || !name) {
             throw new Error("Missing anything");
         }
@@ -64,9 +60,16 @@ const addTimeTable = async (req, res) => {
             throw new Error("Subject not in valid");
         }
 
+        const existingElement = await TimeTableModel.find({})
+        // console.log(existingElement.grade);
+        // console.log(existingElement.day);
+        // console.log(existingElement.time);
 
-     
-
+        existingElement.forEach(element => {
+            if (element.grade === grade && element.day === day && element.time === time) {
+                throw new Error("Data not valid because duplicating");
+            }
+        });
 
 
         const newTimetable = new TimeTableModel(req.body);
@@ -91,54 +94,48 @@ const deleteTimeTable = async (req, res) => {
     // const { id } = req.params
 
     try {
-        const timetable = await TimeTableModel.find({ class_id: class_id })
+        const timetable = await TimeTableModel.findOneAndDelete({ _id: req.body.timetableId, })
+        res.status(201).json({
+            message: "Delete timetable successfully"
+        })
+
+        // if (timetable) {
+        //     await timetable.destroy();
+        //     res.status(201).json({
+        //         message: "Delete timetable successfully"
+        //     })
+        // }
+
+        // else {
+        //     res.status(401).json({
+        //         message: "Delete timetable failed"
+        //     })
+        // }
 
 
-        if (timetable) {
-            await timetable.destroy();
-            res.status(201).json({
-                message: "Delete timetable successfully"
-            })
-        }
 
-        else {
-            res.status(401).json({
-                message: "Delete timetable failed"
-            })
-        }
 
     } catch (error) {
         res.status(400).json({
-            message: `Delete subject controller error: ${error.message}`,
+            message: `Delete timetable controller error: ${error.message}`,
         });
     }
 }
 
 
 const updateTimeTable = async (req, res) => {
-    const { class_id, day, time, subject } = req.body
+    // const { class_id, day, time, subject } = req.body
 
     try {
-        const classExists = await ClassModel.findOne({ class_id })
-
-        if (!classExists) {
-            handleValidationError("Class not found!", 400);
-        }
-
-        if (classExists) {
-            await classExists.update({
-                class_id,
-                day,
-                time,
-                subject
-            })
-
-            res.status(200).json({
-                success: true,
-                message: "Timetable updated successfully!",
-            });
-        }
-
+        await TimeTableModel.findOneAndUpdate(
+            {
+                _id: req.body.timetableId
+            },
+            req.body.payload
+        )
+        res.status(201).json({
+            message: "Update timetable's information successfully"
+        })
 
     } catch (error) {
         res.status(400).json({
@@ -147,4 +144,4 @@ const updateTimeTable = async (req, res) => {
     }
 }
 
-export { getAllTimeTables, getTimeTableByClassID, addTimeTable, deleteTimeTable, updateTimeTable }
+export { getAllTimeTables, getTimeTableByClass, addTimeTable, deleteTimeTable, updateTimeTable }

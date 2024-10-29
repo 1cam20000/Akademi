@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { addTimeTable, deleteTimeTable, getAllTimeTables, getTimeTableByClassID, updateTimeTable } from '../controllers/TimeTableController.js';
+import { addTimeTable, deleteTimeTable, getAllTimeTables, getTimeTableByClass, updateTimeTable } from '../controllers/TimeTableController.js';
 
 
 
@@ -8,10 +8,10 @@ const timetableRoute = Router();
 
 //routers
 //--get all timetable
-timetableRoute.post("/get-timetables", getAllTimeTables)
+timetableRoute.post("/get-all-timetables", getAllTimeTables)
 
 //--get timetable by class id
-timetableRoute.post("/get-timetables-by-class-id", getTimeTableByClassID)
+timetableRoute.post("/get-timetables-by-class", getTimeTableByClass)
 
 //--add new subject
 timetableRoute.post("/add-timetables", addTimeTable)
